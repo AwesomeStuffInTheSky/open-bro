@@ -1,0 +1,1 @@
+web: java -Xdebug -Ddw.server.connector.port=8080 -cp build/install/auth-api/lib/*;. pt.ob.dropwizard.app.DropwizardApplication server server.yml
