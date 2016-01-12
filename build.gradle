@@ -47,6 +47,11 @@ task stage (
 )
 
 
+installDist {
+	destinationDir = file( 'build/install/' ) 
+}
+
+
 /*jacoco {
 	applyTo asdasd
 }
