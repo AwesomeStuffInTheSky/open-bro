@@ -1,6 +1,7 @@
 package pt.ob.util.validators;
 
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -31,6 +32,7 @@ public class NotEmptyStringArgumentValidatorTest {
 	public void validateUsingANullArgumentTest() {
 		this.expectedException.expect( IllegalArgumentException.class );
 		this.validator.validate( null, "someArgumentName" );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
@@ -38,6 +40,7 @@ public class NotEmptyStringArgumentValidatorTest {
 	public void validateUsingAEmptyStringTest() {
 		this.expectedException.expect( IllegalArgumentException.class );
 		this.validator.validate( "", "someArgumentName" );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	

@@ -63,6 +63,7 @@ public final class UserRepositoryImplTest {
 	public void getUserWithUserIdUsingAValidButNonExistantIdTest() {
 		this.expectedException.expect( EntityNotFoundException.class );
 		this.userRepositoryImpl.getUserWithUserId( "895637b0-0631-4509-b14a-3204701b7d03" );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
@@ -70,6 +71,7 @@ public final class UserRepositoryImplTest {
 	public void getUserWithUserIdUsingANullArgumentTest() {
 		this.expectedException.expect( IllegalArgumentException.class );
 		this.userRepositoryImpl.getUserWithUserId( null );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
@@ -77,6 +79,7 @@ public final class UserRepositoryImplTest {
 	public void getUserWithUserIdUsingAEmptyStringArgumentTest() {
 		this.expectedException.expect( IllegalArgumentException.class );
 		this.userRepositoryImpl.getUserWithUserId( "" );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
@@ -86,6 +89,7 @@ public final class UserRepositoryImplTest {
 		// and not as an UUID, for the invalid format shouldn't matter
 		this.expectedException.expect( EntityNotFoundException.class );
 		this.userRepositoryImpl.getUserWithUserId( "abc-123-bca" );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
@@ -95,7 +99,6 @@ public final class UserRepositoryImplTest {
 		Assert.assertEquals( "252a75ad-0080-4ae4-a7fe-80752102386a", entity.getUserId() );
 		Assert.assertEquals( "john.doe@gmail.com", entity.getUsername() );
 		Assert.assertEquals( "$2a$12$5LX7hzjWXYGHBaZug0VyXe/W.rgYjzt522djwgznRH/tCrkVH3ALC", entity.getPasswordDigest() );
-		
 	}
 	
 	
@@ -103,6 +106,7 @@ public final class UserRepositoryImplTest {
 	public void getUserWithUsernameUsingANonExistantUsernameTest() {
 		this.expectedException.expect( EntityNotFoundException.class );
 		this.userRepositoryImpl.getUserWithUsername( "johnnotdoe" );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
@@ -110,6 +114,7 @@ public final class UserRepositoryImplTest {
 	public void getUserWithUsernameUsingANullArgumentTest() {
 		this.expectedException.expect( IllegalArgumentException.class );
 		this.userRepositoryImpl.getUserWithUsername( null );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
@@ -117,6 +122,7 @@ public final class UserRepositoryImplTest {
 	public void getUserWithUsernameUsingAnEmptyStringAsArgumentTest() {
 		this.expectedException.expect( IllegalArgumentException.class );
 		this.userRepositoryImpl.getUserWithUsername( "" );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
