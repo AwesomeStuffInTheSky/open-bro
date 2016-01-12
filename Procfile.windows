@@ -1,1 +1,1 @@
-web: java -Ddw.server.connector.port=8080 -cp build/install/open-bro/lib/*;. pt.ob.dropwizard.app.DropwizardApplication server server.yml
+web: java -Ddw.server.connector.port=8080 -cp build/install/lib/*;. pt.ob.dropwizard.app.DropwizardApplication server server.yml
