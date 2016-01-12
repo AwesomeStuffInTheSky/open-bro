@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Ddw.server.connector.port=$PORT -cp build/install/lib/*:. pt.caleia.onliner.OnlinerApplication
+web: java $JAVA_OPTS -Ddw.server.connector.port=$PORT -cp build/install/open-bro/lib/*:. pt.ob.dropwizard.app.DropwizardApplication server server.yml
