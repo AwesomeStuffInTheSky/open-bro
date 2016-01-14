@@ -27,14 +27,13 @@ public final class UserResourceTest {
 	public final ExpectedException expectedException;
 
 	private final UserMongoRepositoryMock userMongoRepository;
-	private final UserRepositoryImpl userRepository;
 	private final UserResource userResource;
 
 
 	public UserResourceTest() {
 		this.expectedException = ExpectedException.none();
 		this.userMongoRepository = new UserMongoRepositoryMock();
-		this.userRepository = new UserRepositoryImpl( userMongoRepository );
+		UserRepositoryImpl userRepository = new UserRepositoryImpl( userMongoRepository );
 		EmailUsernameFormatValidator usernameFormatValidator = new EmailUsernameFormatValidator();
 		WeakPasswordFormatValidator passwordFormatValidator = new WeakPasswordFormatValidator();
 		BCryptPasswordDigester passwordDigester = new BCryptPasswordDigester( 10 );

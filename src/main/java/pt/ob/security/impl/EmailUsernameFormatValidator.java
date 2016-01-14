@@ -19,11 +19,7 @@ public class EmailUsernameFormatValidator implements UsernameFormatValidator {
 			InternetAddress.parse( username );
 			
 			//TODO The InternetAddress is shit
-			if( username.contains( "@" ) == false ) {
-				return false;
-			}
-			
-			return true;
+			return username.contains( "@" );
 		}
 		catch( AddressException ae ) {
 			return false;

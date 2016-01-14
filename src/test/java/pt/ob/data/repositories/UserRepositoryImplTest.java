@@ -126,26 +126,10 @@ public final class UserRepositoryImplTest {
 	}
 	
 	
-	// --- /// TODO
-	
-	
 	@Test
 	public void existsWithUsernameUsingAValidExistantUsernameTest() {
 		boolean exists = this.userRepositoryImpl.existsWithUsername( "john.doe@gmail.com" );
 		Assert.assertTrue( exists );
-	}
-	
-	
-	//UsingANonExistantUsernameTest
-	
-	
-	@Test
-	public void asdasd() {
-		UserEntity entity1 = new UserEntity( "asdasdasd", "asdasdasd", "asdasdasd", LocalDateTime.now(), true );
-		UserEntity entity2 = new UserEntity( "asdasdasd", "gtgtgtgtg", "tgtgtgtgt", LocalDateTime.now(), true );
-		this.userRepositoryImpl.save( entity1 );
-		this.userRepositoryImpl.save( entity2 );
-		//Assert.fail( "On porpuse" );
 	}
 
 }

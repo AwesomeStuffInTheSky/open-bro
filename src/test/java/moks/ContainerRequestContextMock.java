@@ -107,7 +107,7 @@ public class ContainerRequestContextMock implements ContainerRequestContext {
 
 	@Override
 	public String getHeaderString( String name ) {
-		if( name.equals( "Auth-Token" ) )
+		if( "Auth-Token".equals( name ) )
 			return this.authToken;
 		else
 			return null;
