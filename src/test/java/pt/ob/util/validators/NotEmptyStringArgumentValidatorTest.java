@@ -47,18 +47,21 @@ public class NotEmptyStringArgumentValidatorTest {
 	@Test
 	public void validateUsingAEmptyStringWithSpacesTest() {
 		this.validator.validate( "  ", "someArgumentName" );
+		Assert.assertTrue( "Should reach this point.", true );
 	}
 	
 	
 	@Test
 	public void validateUsingAEmptyStringWithTabsTest() {
 		this.validator.validate( "\t\t", "someArgumentName" );
+		Assert.assertTrue( "Should reach this point.", true );
 	}
 	
 	
 	@Test
 	public void validateUsingAValidArgumentAndANullNameTest() {
 		this.validator.validate( "someArgument", null );
+		Assert.assertTrue( "Should reach this point.", true );
 	}
 	
 	
@@ -67,7 +70,8 @@ public class NotEmptyStringArgumentValidatorTest {
 	 */
 	@Test
 	public void valueOfUsingAValidEnumPropertyTest() {
-		NotEmptyStringArgumentValidator.valueOf( "INSTANCE" );
+		NotEmptyStringArgumentValidator instance = NotEmptyStringArgumentValidator.valueOf( "INSTANCE" );
+		Assert.assertNotNull( "Should not be null.", instance );
 	}
 
 }

@@ -1,6 +1,7 @@
 package pt.ob.util.validators;
 
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -24,6 +25,7 @@ public class NotNullArgumentValidatorTest {
 	@Test
 	public void validateUsingANotNullStringArgumentAndNameTest() {
 		this.validator.validate( "someArgument", "someArgumentName" );
+		Assert.assertTrue( "Should reach this point.", true );
 	}
 	
 	
@@ -31,6 +33,7 @@ public class NotNullArgumentValidatorTest {
 	public void validateUsingANotNullPrimitiveArgumentAndNameTest() {
 		int a = 42;
 		this.validator.validate( a, "someArgumentName" );
+		Assert.assertTrue( "Should reach this point.", true );
 	}
 	
 	
@@ -38,6 +41,7 @@ public class NotNullArgumentValidatorTest {
 	public void validateUsingANullArgumentAndNameTest() {
 		this.expectedException.expect( IllegalArgumentException.class );
 		this.validator.validate( null, "someArgumentName" );
+		Assert.fail( "An exception should have been throwed." );
 	}
 	
 	
@@ -46,7 +50,8 @@ public class NotNullArgumentValidatorTest {
 	 */
 	@Test
 	public void valueOfUsingAValidEnumPropertyTest() {
-		NotNullArgumentValidator.valueOf( "INSTANCE" );
+		NotNullArgumentValidator instance = NotNullArgumentValidator.valueOf( "INSTANCE" );
+		Assert.assertNotNull( "Should not be null.", instance );
 	}
 
 }
