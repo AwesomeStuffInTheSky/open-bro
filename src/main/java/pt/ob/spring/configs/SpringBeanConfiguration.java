@@ -11,7 +11,8 @@ import pt.ob.auth.impl.handlers.UUIDUserHandler;
 import pt.ob.data.repositories.UserMongoRepository;
 import pt.ob.data.repositories.UserRepository;
 import pt.ob.data.repositories.UserRepositoryImpl;
-import pt.ob.rest.filters.SecurityFilter;
+import pt.ob.rest.filters.AuthenticationFilter;
+import pt.ob.rest.filters.AuthorizationFilter;
 import pt.ob.rest.resources.AuthenticationResource;
 import pt.ob.rest.resources.UserResource;
 import pt.ob.security.PasswordDigester;
@@ -27,8 +28,14 @@ public class SpringBeanConfiguration {
 
 
 	@Bean
-	public SecurityFilter getSecurityFilter() {
-		return new SecurityFilter();
+	public AuthenticationFilter getAuthenticationFilter( UserHandler userHandler ) {
+		return new AuthenticationFilter( userHandler );
+	}
+	
+	
+	@Bean
+	public AuthorizationFilter getAuthorizationFilter() {
+		return new AuthorizationFilter();
 	}
 
 
@@ -65,7 +72,7 @@ public class SpringBeanConfiguration {
 
 	@Bean
 	public PasswordDigester getPasswordDigester() {
-		return new BCryptPasswordDigester( 10 ); // TODO
+		return new BCryptPasswordDigester( 10 ); // FIXME This value should not be fixed
 	}
 
 

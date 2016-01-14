@@ -31,6 +31,7 @@ dependencies {
 	compile group: 'org.aspectj', 					name: 'aspectjweaver', 			version: '1.8.5'
 	
 	compile group: 'io.dropwizard',					name: 'dropwizard-core',		version: '0.9.1'
+	compile group: 'io.dropwizard', 				name: 'dropwizard-assets', 		version: '0.9.1'
 	
 	compile group: 'io.jsonwebtoken',				name: 'jjwt', 					version: '0.6.0'
 	

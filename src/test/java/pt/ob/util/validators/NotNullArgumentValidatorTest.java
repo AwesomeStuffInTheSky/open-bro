@@ -41,7 +41,9 @@ public class NotNullArgumentValidatorTest {
 	}
 	
 	
-	// TODO This test is just to increase the coverage of JaCoCo
+	/**
+	 *  This test is just to increase the coverage of JaCoCo
+	 */
 	@Test
 	public void valueOfUsingAValidEnumPropertyTest() {
 		NotNullArgumentValidator.valueOf( "INSTANCE" );

@@ -69,8 +69,8 @@ public final class UserResourceTest {
 		Response response = this.userResource.createUser( credentialPair );
 		Assert.assertNotNull( response );
 		Assert.assertEquals( Status.BAD_REQUEST, response.getStatusInfo() );
-		
-		System.out.println( response.getEntity().getClass() );
 	}
+	
+	//TODO not finished
 
 }

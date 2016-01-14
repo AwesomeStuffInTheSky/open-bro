@@ -6,9 +6,11 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import pt.ob.rest.filters.SecurityFilter;
+import pt.ob.rest.filters.AuthenticationFilter;
+import pt.ob.rest.filters.AuthorizationFilter;
 import pt.ob.rest.resources.AuthenticationResource;
 import pt.ob.rest.resources.UserResource;
 
@@ -22,7 +24,12 @@ public class DropwizardApplication extends Application<Configuration> {
 
 
 	@Override
-	public void initialize( Bootstrap<Configuration> bootstrap ) {}
+	public void initialize( Bootstrap<Configuration> bootstrap ) {
+		bootstrap.addBundle( new AssetsBundle( "/css", "/css", null, "css" ) );
+		bootstrap.addBundle( new AssetsBundle( "/images", "/image", null, "images" ) );
+		bootstrap.addBundle( new AssetsBundle( "/js", "/js", null, "js" ) );
+		bootstrap.addBundle( new AssetsBundle( "/html", "/", "index.html", "html" ) );
+	}
 
 
 	@Override
@@ -32,7 +39,8 @@ public class DropwizardApplication extends Application<Configuration> {
 		environment.servlets().addServletListeners( new ContextLoaderListener( webContext ) );
 		webContext.refresh();
 		
-		environment.jersey().register( webContext.getBean( SecurityFilter.class ) );
+		environment.jersey().register( webContext.getBean( AuthenticationFilter.class ) );
+		environment.jersey().register( webContext.getBean( AuthorizationFilter.class ) );
 		environment.jersey().register( webContext.getBean( UserResource.class ) );
 		environment.jersey().register( webContext.getBean( AuthenticationResource.class ) );
 	}

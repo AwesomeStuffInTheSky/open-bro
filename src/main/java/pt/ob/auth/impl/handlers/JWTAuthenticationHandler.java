@@ -41,22 +41,22 @@ public final class JWTAuthenticationHandler implements AuthenticationHandler {
 			boolean passwordMatches = this.passwordDigester.matches( plainTextPassword, user.getPasswordDigest() );
 			if( passwordMatches == false )
 				throw new InvalidUsernamePasswordException();
+			
+			JwtBuilder jwtBuilder = Jwts.builder().setHeaderParam( "typ", "JWT" ).setSubject( user.getIdAsString() );
+			
+			LocalDateTime now = LocalDateTime.now();
+			jwtBuilder.setIssuedAt( Date.from( now.atZone( ZoneId.systemDefault() ).toInstant() ) );
+			
+			LocalDateTime expiration = LocalDateTime.from( now );
+			expiration = expiration.plusMinutes( 5 ); // FIXME Should not be fixed in here
+			jwtBuilder.setExpiration( Date.from( expiration.atZone( ZoneId.systemDefault() ).toInstant() ) );
+			
+			jwtBuilder.signWith( SignatureAlgorithm.HS512, user.getPasswordDigest().getBytes() );
+			return new JWTAuthenticationToken( now, expiration, jwtBuilder.compact() );
 		}
 		catch( UserNotFoundException unfe ) {
 			throw new InvalidUsernamePasswordException();
 		}
-		
-		JwtBuilder jwtBuilder = Jwts.builder().setHeaderParam( "typ", "JWT" ).setSubject( username );
-		
-		LocalDateTime now = LocalDateTime.now();
-		jwtBuilder.setIssuedAt( Date.from( now.atZone( ZoneId.systemDefault() ).toInstant() ) );
-		
-		LocalDateTime expiration = LocalDateTime.from( now );
-		expiration = expiration.plusMinutes( 5 );
-		jwtBuilder.setExpiration( Date.from( expiration.atZone( ZoneId.systemDefault() ).toInstant() ) );
-		
-		jwtBuilder.signWith( SignatureAlgorithm.HS512, username.getBytes() ); // TODO username
-		return new JWTAuthenticationToken( now, expiration, jwtBuilder.compact() );
 	}
 
 }

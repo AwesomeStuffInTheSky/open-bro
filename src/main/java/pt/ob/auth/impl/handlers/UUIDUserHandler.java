@@ -4,8 +4,6 @@ package pt.ob.auth.impl.handlers;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import javax.persistence.EntityNotFoundException;
-
 import pt.ob.auth.User;
 import pt.ob.auth.UserHandler;
 import pt.ob.auth.exceptions.InvalidPasswordException;
@@ -14,6 +12,7 @@ import pt.ob.auth.exceptions.InvalidUsernameException;
 import pt.ob.auth.exceptions.UsernameAlreadyExistsException;
 import pt.ob.auth.impl.UUIDUser;
 import pt.ob.data.entities.UserEntity;
+import pt.ob.data.exceptions.EntityNotFoundException;
 import pt.ob.data.exceptions.UserNotFoundException;
 import pt.ob.data.repositories.UserRepository;
 import pt.ob.security.PasswordDigester;

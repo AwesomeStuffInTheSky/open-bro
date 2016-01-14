@@ -38,6 +38,5 @@ public class SpringEnvironmentConfiguration {
 	public String getMongoDBPass() {
 		return System.getenv( "MONGO_DB_PASS" );
 	}
-	
 
 }
