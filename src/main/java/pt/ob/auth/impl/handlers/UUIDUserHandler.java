@@ -4,6 +4,7 @@ package pt.ob.auth.impl.handlers;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import pt.asits.util.argument.assertions.Argument;
 import pt.ob.auth.User;
 import pt.ob.auth.UserHandler;
 import pt.ob.auth.exceptions.InvalidPasswordException;
@@ -18,8 +19,6 @@ import pt.ob.data.repositories.UserRepository;
 import pt.ob.security.PasswordDigester;
 import pt.ob.security.PasswordFormatValidator;
 import pt.ob.security.UsernameFormatValidator;
-import pt.ob.util.validators.NotEmptyStringArgumentValidator;
-import pt.ob.util.validators.NotNullArgumentValidator;
 
 
 public final class UUIDUserHandler implements UserHandler {
@@ -33,9 +32,11 @@ public final class UUIDUserHandler implements UserHandler {
 
 	public UUIDUserHandler( UserRepository userRepository, UsernameFormatValidator usernameFormatValidator,
 			PasswordFormatValidator passwordFormatValidator, PasswordDigester passwordDigester ) {
-		NotNullArgumentValidator.INSTANCE.validate( userRepository, "userRepository", usernameFormatValidator,
-				"usernameFormatValidator", passwordFormatValidator, "passwordFormatValidator" );
-		NotNullArgumentValidator.INSTANCE.validate( passwordDigester, "passwordDigester" );
+		Argument.assertNotNull( userRepository, "userRepository" );
+		Argument.assertNotNull( usernameFormatValidator, "usernameFormatValidator" );
+		Argument.assertNotNull( passwordFormatValidator, "passwordFormatValidator" );
+		Argument.assertNotNull( passwordDigester, "passwordDigester" );
+		
 		this.userRepository = userRepository;
 		this.usernameFormatValidator = usernameFormatValidator;
 		this.passwordFormatValidator = passwordFormatValidator;
@@ -46,7 +47,8 @@ public final class UUIDUserHandler implements UserHandler {
 	@Override
 	public User createUser( String username, String password )
 			throws InvalidUsernameException, InvalidPasswordException, UsernameAlreadyExistsException {
-		NotEmptyStringArgumentValidator.INSTANCE.validate( username, "username", password, "password" );
+		Argument.assertNotEmpty( username, "username" );
+		Argument.assertNotEmpty( password, "password" );
 
 		boolean validUsernameFormat = this.usernameFormatValidator.isValid( username );
 		if( validUsernameFormat == false )
@@ -70,7 +72,7 @@ public final class UUIDUserHandler implements UserHandler {
 
 	@Override
 	public User getUserWithUsername( String username ) throws UserNotFoundException {
-		NotEmptyStringArgumentValidator.INSTANCE.validate( username, "username" );
+		Argument.assertNotEmpty( username, "username" );
 
 		try {
 			UserEntity entity = this.userRepository.getUserWithUsername( username );
@@ -86,7 +88,7 @@ public final class UUIDUserHandler implements UserHandler {
 
 	@Override
 	public User getUserWithId( String userId ) throws InvalidUserIdException, UserNotFoundException {
-		NotEmptyStringArgumentValidator.INSTANCE.validate( userId, "userId" );
+		Argument.assertNotEmpty( userId, "userId" );
 
 		try {
 			UUID.fromString( userId );

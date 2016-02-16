@@ -3,9 +3,8 @@ package pt.ob.auth.impl;
 
 import java.util.UUID;
 
+import pt.asits.util.argument.assertions.Argument;
 import pt.ob.auth.User;
-import pt.ob.util.validators.NotEmptyStringArgumentValidator;
-import pt.ob.util.validators.NotNullArgumentValidator;
 
 
 public final class UUIDUser implements User {
@@ -17,8 +16,9 @@ public final class UUIDUser implements User {
 
 
 	public UUIDUser( UUID id, String username, String passwordDigest ) {
-		NotNullArgumentValidator.INSTANCE.validate( id, "id" );
-		NotEmptyStringArgumentValidator.INSTANCE.validate( username, "username", passwordDigest, "passwordDigest" );
+		Argument.assertNotNull( id, "id" );
+		Argument.assertNotEmpty( username, "username" );
+		Argument.assertNotEmpty( passwordDigest, "passwordDigest" );
 		this.id = id;
 		this.username = username;
 		this.passwordDigest = passwordDigest;

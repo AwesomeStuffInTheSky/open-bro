@@ -3,9 +3,8 @@ package pt.ob.auth.impl;
 
 import java.time.LocalDateTime;
 
+import pt.asits.util.argument.assertions.Argument;
 import pt.ob.auth.AuthenticationToken;
-import pt.ob.util.validators.NotEmptyStringArgumentValidator;
-import pt.ob.util.validators.NotNullArgumentValidator;
 
 
 public final class JWTAuthenticationToken implements AuthenticationToken {
@@ -17,8 +16,9 @@ public final class JWTAuthenticationToken implements AuthenticationToken {
 
 
 	public JWTAuthenticationToken( LocalDateTime issueTime, LocalDateTime expirationTime, String jwtString ) {
-		NotNullArgumentValidator.INSTANCE.validate( issueTime, "issueTime", expirationTime, "expirationTime" );
-		NotEmptyStringArgumentValidator.INSTANCE.validate( jwtString, "jwtString" );
+		Argument.assertNotNull( issueTime, "issueTime" );
+		Argument.assertNotNull( expirationTime, "expirationTime" );
+		Argument.assertNotEmpty( jwtString, "jwtString" );
 		this.issueTime = issueTime;
 		this.expirationTime = expirationTime;
 		this.jwtString = jwtString;
@@ -35,8 +35,8 @@ public final class JWTAuthenticationToken implements AuthenticationToken {
 	public boolean isExpired() {
 		return this.expirationTime.isBefore( LocalDateTime.now() );
 	}
-	
-	
+
+
 	public LocalDateTime getIssueTime() {
 		return this.issueTime;
 	}

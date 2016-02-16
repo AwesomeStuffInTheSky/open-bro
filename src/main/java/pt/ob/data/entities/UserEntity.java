@@ -10,8 +10,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import pt.ob.util.validators.NotEmptyStringArgumentValidator;
-import pt.ob.util.validators.NotNullArgumentValidator;
+import pt.asits.util.argument.assertions.Argument;
 
 
 @Document( collection = "users" )
@@ -41,8 +40,11 @@ public final class UserEntity {
 
 
 	public UserEntity( String userId, String username, String passwordDigest, LocalDateTime timeCreated, boolean enabled ) {
-		NotEmptyStringArgumentValidator.INSTANCE.validate( userId, "userId", username, "username", passwordDigest, "passwordDigest" );
-		NotNullArgumentValidator.INSTANCE.validate( timeCreated, "timeCreated" );
+		Argument.assertNotEmpty( userId, "userId" );
+		Argument.assertNotEmpty( username, "username" );
+		Argument.assertNotEmpty( passwordDigest, "passwordDigest" );
+		Argument.assertNotNull( timeCreated, "timeCreated" );
+
 		this.userId = userId;
 		this.username = username;
 		this.passwordDigest = passwordDigest;

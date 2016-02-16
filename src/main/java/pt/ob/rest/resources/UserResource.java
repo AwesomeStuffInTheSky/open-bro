@@ -9,6 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import pt.asits.util.ObjectConverter;
 import pt.ob.auth.User;
 import pt.ob.auth.UserHandler;
 import pt.ob.auth.exceptions.InvalidPasswordException;
@@ -17,7 +18,6 @@ import pt.ob.auth.exceptions.UsernameAlreadyExistsException;
 import pt.ob.rest.entities.CredentialPairJson;
 import pt.ob.rest.entities.UserJson;
 import pt.ob.rest.response.PreparedResponse;
-import pt.ob.util.ObjectConverter;
 import pt.ob.util.converters.UserConverter;
 
 
@@ -54,8 +54,8 @@ public class UserResource {
 			return PreparedResponse.conflict().error( "Username already exists." ).build();
 		}
 	}
-	
-	
+
+
 	@GET
 	@Path( "details" )
 	public Response listUsers() {

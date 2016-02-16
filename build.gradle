@@ -18,6 +18,9 @@ jar { manifest { attributes 'Implementation-Title': 'auth-api', 'Implementation-
 
 repositories {
     mavenCentral()
+    maven {
+		url "http://dl.bintray.com/awesomestuffinthesky/maven"
+    }
 }
 
 
@@ -34,6 +37,10 @@ dependencies {
 	compile group: 'io.dropwizard', 				name: 'dropwizard-assets', 		version: '0.9.1'
 	
 	compile group: 'io.jsonwebtoken',				name: 'jjwt', 					version: '0.6.0'
+	
+	
+	compile group: 'pt.asits',						name: 'general-utils',			version: '1.0.0'
+	
 	
 	compile group: 'javax',							name: 'javaee-api', 			version: '7.0'
 	

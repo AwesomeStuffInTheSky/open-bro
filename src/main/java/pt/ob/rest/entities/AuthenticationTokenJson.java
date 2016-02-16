@@ -7,9 +7,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import pt.asits.util.argument.assertions.Argument;
 import pt.ob.util.json.LocalDateTimeJsonSerializer;
-import pt.ob.util.validators.NotEmptyStringArgumentValidator;
-import pt.ob.util.validators.NotNullArgumentValidator;
 
 
 public final class AuthenticationTokenJson {
@@ -25,9 +24,10 @@ public final class AuthenticationTokenJson {
 
 	@JsonCreator
 	public AuthenticationTokenJson( @JsonProperty( "token" ) String token,
-			@JsonProperty( "expirationTime" ) LocalDateTime expirationTime ) {
-		NotEmptyStringArgumentValidator.INSTANCE.validate( token, "token" );
-		NotNullArgumentValidator.INSTANCE.validate( expirationTime, "expirationTime" );
+			@JsonProperty( "expirationTime" ) LocalDateTime expirationTime) {
+		Argument.assertNotEmpty( token, "token" );
+		Argument.assertNotNull( expirationTime, "expirationTime" );
+
 		this.token = token;
 		this.expirationTime = expirationTime;
 	}
@@ -39,7 +39,7 @@ public final class AuthenticationTokenJson {
 
 
 	public LocalDateTime getExpirationTime() {
-		return expirationTime;
+		return this.expirationTime;
 	}
 
 }

@@ -1,11 +1,11 @@
 package pt.ob.util.converters;
 
 
+import pt.asits.util.ObjectConverter;
+import pt.asits.util.argument.assertions.Argument;
+import pt.asits.util.exceptions.ConversionException;
 import pt.ob.auth.AuthenticationToken;
 import pt.ob.rest.entities.AuthenticationTokenJson;
-import pt.ob.util.ConversionException;
-import pt.ob.util.ObjectConverter;
-import pt.ob.util.validators.NotNullArgumentValidator;
 
 
 public class AuthenticationTokenConverter implements ObjectConverter<AuthenticationToken, AuthenticationTokenJson> {
@@ -13,7 +13,8 @@ public class AuthenticationTokenConverter implements ObjectConverter<Authenticat
 
 	@Override
 	public AuthenticationTokenJson convert( AuthenticationToken token ) throws ConversionException {
-		NotNullArgumentValidator.INSTANCE.validate( token, "token" );
+		Argument.assertNotNull( token, "token" );
+
 		try {
 			return new AuthenticationTokenJson( token.getAsString(), token.getExpirationTime() );
 		}

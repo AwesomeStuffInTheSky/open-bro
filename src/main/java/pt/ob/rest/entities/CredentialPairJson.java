@@ -4,7 +4,7 @@ package pt.ob.rest.entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import pt.ob.util.validators.NotNullArgumentValidator;
+import pt.asits.util.argument.assertions.Argument;
 
 
 public class CredentialPairJson {
@@ -18,20 +18,22 @@ public class CredentialPairJson {
 
 
 	@JsonCreator
-	public CredentialPairJson( @JsonProperty( "username" ) String username, @JsonProperty( "password" ) String password ) {
-		NotNullArgumentValidator.INSTANCE.validate( username, "username", password, "password" );
+	public CredentialPairJson( @JsonProperty( "username" ) String username, @JsonProperty( "password" ) String password) {
+		Argument.assertNotEmpty( username, "username" );
+		Argument.assertNotEmpty( password, "password" );
+
 		this.username = username;
 		this.password = password;
 	}
 
 
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 }
